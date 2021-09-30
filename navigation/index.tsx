@@ -39,7 +39,17 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="MovieDetails" component={MovieDetailsScreen} options={{ title: 'Details' }} />
+      <Stack.Screen name="MovieDetails" component={MovieDetailsScreen}
+        options={{
+          title: '',
+          headerStyle: {
+            backgroundColor: '#1B1C2A',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
+        }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
@@ -67,8 +77,15 @@ function BottomTabNavigator() {
         name="TopMoviesScreen"
         component={TopMoviesScreen}
         options={({ navigation }: RootTabScreenProps<'TopMoviesScreen'>) => ({
-          title: 'Trending',
+          title: 'Top Movies',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          headerStyle: {
+            backgroundColor: '#1B1C2A',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         })}
       />
     </BottomTab.Navigator>

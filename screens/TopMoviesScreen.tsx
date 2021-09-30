@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import MovieCard from '../components/MovieCard';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
 export default function TopMoviesScreen({ navigation }: RootTabScreenProps<'TopMoviesScreen'>) {
@@ -44,16 +44,15 @@ export default function TopMoviesScreen({ navigation }: RootTabScreenProps<'TopM
       }
 
       return (
-        <TouchableWithoutFeedback key={index} onPress={() => handleNavigation(movie)}>
+        <TouchableOpacity key={index} onPress={() => handleNavigation(movie)}>
           <MovieCard movie={movie} index={index} />
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       )
     })
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Top Movies</Text>
       <ScrollView style={styles.movieList}>
         {mapMovies(movies)}
       </ScrollView>

@@ -3,9 +3,12 @@ import { ImageBackground, ScrollView, StyleSheet } from 'react-native';
 
 import MovieCard from '../components/MovieCard';
 import { Text, View } from '../components/Themed';
+import { mapGenres, searchGenres } from '../utils/Genres';
 
 export default function MovieDetailsScreen({ route, navigation }: { route: any, navigation: any }) {
   const { selectedMovie, movies, } = route.params;
+
+  const movieGenres = searchGenres(selectedMovie.genre_ids)
 
   const mapMovies = (movies: []) => {
     return movies.map((movie: {}, index: number) => {
@@ -26,7 +29,7 @@ export default function MovieDetailsScreen({ route, navigation }: { route: any, 
         >
           {selectedMovie.topMovie ? <Text style={styles.topMovieTag}>🥇 Top movie this week</Text> : null}
           <Text style={styles.selectedMovieTitle}>{selectedMovie.original_title}</Text>
-          <Text style={styles.extraDetails}>{selectedMovie.release_date.split('-')[0]} • Fantasy / Science Fiction • 2h 5m</Text>
+          <Text style={styles.extraDetails}>{selectedMovie.release_date.split('-')[0]} • {mapGenres(movieGenres)} • 2h 5m</Text>
           <Text style={styles.overview}>{selectedMovie.overview}</Text>
         </ImageBackground>
       </View>
