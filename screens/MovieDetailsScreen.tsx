@@ -5,7 +5,7 @@ import MovieCard from '../components/MovieCard';
 import { Text, View } from '../components/Themed';
 import { mapGenres, searchGenres } from '../utils/Genres';
 
-export default function MovieDetailsScreen({ route, navigation }: { route: any, navigation: any }) {
+export default function MovieDetailsScreen({ route }: { route: any }) {
   const { selectedMovie, movies, } = route.params;
 
   const movieGenres = searchGenres(selectedMovie.genre_ids)
@@ -13,7 +13,7 @@ export default function MovieDetailsScreen({ route, navigation }: { route: any, 
   const mapMovies = (movies: []) => {
     return movies.map((movie: {}, index: number) => {
       return (
-        <MovieCard key={index} movie={movie} index={index} />
+        <MovieCard key={index} movie={movie} />
       )
     })
   }
@@ -44,7 +44,7 @@ export default function MovieDetailsScreen({ route, navigation }: { route: any, 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1B1C2A'
+    backgroundColor: '#070818'
   },
   selectedMovieImage: {
     paddingHorizontal: 20

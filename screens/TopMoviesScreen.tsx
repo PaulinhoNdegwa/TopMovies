@@ -45,7 +45,7 @@ export default function TopMoviesScreen({ navigation }: RootTabScreenProps<'TopM
 
       return (
         <TouchableOpacity key={index} onPress={() => handleNavigation(movie)}>
-          <MovieCard movie={movie} index={index} />
+          <MovieCard movie={movie} />
         </TouchableOpacity>
       )
     })

@@ -1,13 +1,13 @@
 import React from "react";
 import { Image, Text, View, StyleSheet } from "react-native";
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import { Rating } from 'react-native-ratings';
 
 import { mapGenres, searchGenres } from "../utils/Genres";
 
-const MovieCard = ({ movie, index }: { movie: any, index: any }) => {
+const MovieCard = ({ movie }: { movie: any}) => {
     const movieGenres = searchGenres(movie.genre_ids)
     return (
-        <View style={index === 0 ? styles.topMovie : styles.movieCard}>
+        <View style={movie.topMovie ? styles.topMovie : styles.movieCard}>
             <Image
                 source={{
                     uri: `https://image.tmdb.org/t/p/w500` + movie.poster_path
