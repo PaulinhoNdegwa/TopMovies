@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import MovieCard from '../components/MovieCard';
-import { View } from '../components/Themed';
+import { View, Text } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
 export default function TopMoviesScreen({ navigation }: RootTabScreenProps<'TopMoviesScreen'>) {
@@ -39,7 +39,7 @@ export default function TopMoviesScreen({ navigation }: RootTabScreenProps<'TopM
 
   const mapMovies = (movies: []) => {
     return movies.map((movie: any, index: number) => {
-      if(index === 0){
+      if (index === 0) {
         movie.topMovie = true
       }
 
@@ -54,7 +54,12 @@ export default function TopMoviesScreen({ navigation }: RootTabScreenProps<'TopM
   return (
     <View style={styles.container}>
       <ScrollView style={styles.movieList}>
-        {mapMovies(movies)}
+        {movies.length === 0 ?
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color='#fff' />
+            <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>Loading</Text>
+          </View>
+          : mapMovies(movies)}
       </ScrollView>
     </View>
   );
@@ -65,6 +70,12 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 20,
     backgroundColor: '#070818'
+  },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#070818',
   },
   title: {
     color: '#fff',
