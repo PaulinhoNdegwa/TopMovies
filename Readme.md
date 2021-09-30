@@ -20,7 +20,7 @@ Setup Procedure:
     $ npm start OR $ expo start
 ```
 ## Known Bugs
-No known bugs
+* Missing infinite scrolling on the movies list(code removed for now)
 ## Technologies Used
 * JavaScript
 * React Native
