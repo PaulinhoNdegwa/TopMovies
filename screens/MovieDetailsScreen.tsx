@@ -1,15 +1,39 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { ImageBackground, ScrollView, StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
+import MovieCard from '../components/MovieCard';
 import { Text, View } from '../components/Themed';
 
-export default function MovieDetailsScreen() {
+export default function MovieDetailsScreen({ route, navigation }: { route: any, navigation: any }) {
+  const { selectedMovie, movies, } = route.params;
+
+  const mapMovies = (movies: []) => {
+    return movies.map((movie: {}, index: number) => {
+      return (
+        <MovieCard key={index} movie={movie} index={index} />
+      )
+    })
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <View>
+        <ImageBackground source={{
+          uri: `https://image.tmdb.org/t/p/w500` + selectedMovie.poster_path
+        }}
+          resizeMethod='scale'
+          resizeMode='cover'
+          style={styles.selectedMovieImage}
+        >
+          {selectedMovie.topMovie ? <Text style={styles.topMovieTag}>🥇 Top movie this week</Text> : null}
+          <Text style={styles.selectedMovieTitle}>{selectedMovie.original_title}</Text>
+          <Text style={styles.extraDetails}>{selectedMovie.release_date.split('-')[0]} • Fantasy / Science Fiction • 2h 5m</Text>
+          <Text style={styles.overview}>{selectedMovie.overview}</Text>
+        </ImageBackground>
+      </View>
+      <ScrollView style={{ paddingHorizontal: 10 }}>
+        <Text style={{ color: '#FFF', fontSize: 20, fontWeight: 'bold', marginVertical: 5 }}>Also trending</Text>
+        {mapMovies(movies)}
+      </ScrollView>
     </View>
   );
 }
@@ -17,16 +41,36 @@ export default function MovieDetailsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#1B1C2A'
   },
-  title: {
+  selectedMovieImage: {
+    paddingHorizontal: 20
+  },
+  topMovieTag: {
+    color: '#fff',
     fontSize: 20,
-    fontWeight: 'bold',
+    marginTop: 60,
+    marginBottom: 10,
+    fontWeight: '500'
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  selectedMovieTitle: {
+    color: "#FFFFFF",
+    fontSize: 26,
+    fontWeight: 'bold',
+    lineHeight: 30,
+    marginTop: 20,
+    paddingHorizontal: 20
+  },
+  extraDetails: {
+    color: '#fff',
+    fontSize: 16,
+    paddingHorizontal: 20
+  },
+  overview: {
+    fontSize: 18,
+    color: '#FFFFFF',
+    marginVertical: 15,
+    fontWeight: '700',
+    paddingHorizontal: 20
   },
 });

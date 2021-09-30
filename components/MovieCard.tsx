@@ -12,7 +12,7 @@ const MovieCard = ({ movie, index } : {movie: any, index: any}) => {
                     style={styles.poster}
                 />
                 <View style={styles.movieDetail}>
-                    {index === 0 ? <Text style={styles.topMovieTag}>🥇 Top movie this week</Text> : null}
+                    {movie.topMovie ? <Text style={styles.topMovieTag}>🥇 Top movie this week</Text> : null}
                     <Text style={styles.movieTitle}>{movie.original_title}</Text>
                     <Text style={styles.movieExtraDetails}>Fiction / Fantasy</Text>
                     <Text style={styles.movieExtraDetails}>2021</Text>
@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
         fontSize: 17,
         marginBottom: 15,
         fontWeight: '700'
-
     },
     poster: {
         width: 150,

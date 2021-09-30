@@ -29,10 +29,22 @@ export default function TopMoviesScreen({ navigation }: RootTabScreenProps<'TopM
       })
   }
 
+
+  const handleNavigation = (movie: any) => {
+    const otherTrendingMovies = movies.filter((mov: any) => {
+      return mov.id !== movie.id
+    })
+    navigation.navigate("MovieDetails", { selectedMovie: movie, movies: otherTrendingMovies })
+  }
+
   const mapMovies = (movies: []) => {
-    return movies.map((movie: {}, index: number) => {
+    return movies.map((movie: any, index: number) => {
+      if(index === 0){
+        movie.topMovie = true
+      }
+
       return (
-        <TouchableWithoutFeedback key={index} onPress={() => { navigation.navigate("MovieDetails", { selectedMovie: movie, movies: movies }) }}>
+        <TouchableWithoutFeedback key={index} onPress={() => handleNavigation(movie)}>
           <MovieCard movie={movie} index={index} />
         </TouchableWithoutFeedback>
       )

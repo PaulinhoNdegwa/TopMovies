@@ -68,7 +68,7 @@ function BottomTabNavigator() {
         component={TopMoviesScreen}
         options={({ navigation }: RootTabScreenProps<'TopMoviesScreen'>) => ({
           title: 'Trending',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         })}
       />
     </BottomTab.Navigator>
